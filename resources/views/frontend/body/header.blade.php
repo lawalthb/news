@@ -100,11 +100,11 @@ $cdate = new DateTime();
 
 <div class="menu_section sticky" id="myHeader">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12">
+        <div class="row" style="background-color: white;">
+            <div class="col-lg-12 col-md-12" style="background-color: white;">
                 <div class="mobileLogo">
                     <a href=" " title="NewsFlash">
-                        <img src="assets/images/footer_logo.gif" alt="Logo" title="Logo">
+                        <img src="{{ asset('frontend/assets/images/logo.png') }}" alt="Logo" title="Logo">
                     </a>
                 </div>
                 <div class="stellarnav dark desktop"><a href=" " class="menu-toggle full"><span class="bars"><span></span><span></span><span></span></span> </a>
