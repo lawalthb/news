@@ -147,22 +147,31 @@ $breakingnews = App\Models\NewsPost::where('breaking_news',1)->get();
                                     <td><img src="{{ asset($item->image) }} " style="width: 30px; height:30px"></td>
                                     <td>{{ Str::limit($item->news_title,20)  }}</td>
                                     <td>{{ $item['category']['category_name']   }}</td>
-                                    <td> <a href="https://api.whatsapp.com/send?text={{ urlencode(url('/').$item->news_title_slug) }}" target="_blank">
+                                    <td>
+                                        @php
+                                        $link = url('/')."/".$item['category']['category_slug']."/"."details"."/".$item->id."/".$item->news_title_slug;
+                                        @endphp
+
+                                        <a href="https://api.whatsapp.com/send?text={{ urlencode($link) }}" target="_blank">
                                             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Share on WhatsApp" width="30">
                                         </a>
 
                                         <!-- Facebook -->
-                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url('/').$item->news_title_slug) }}" target="_blank">
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode($link) }}" target="_blank">
                                             <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Share on Facebook" width="30">
                                         </a>
 
                                         <!-- Twitter -->
-                                        <a href="https://x.com/intent/tweet?url={{ urlencode(url('/').$item->news_title_slug) }}&text={{ $item->news_title }}" target="_blank">
+                                        <a href="https://x.com/intent/tweet?url={{ urlencode($link) }}&text={{ $item->news_title }}" target="_blank">
                                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/X_logo_2023.svg/256px-X_logo_2023.svg.png?20230819000805" alt="Share on X" width="30">
                                         </a>
 
                                         <style>
-                                            #tooltip{{$item->id}}
+                                            #tooltip {
+                                                    {
+                                                    $item->id
+                                                }
+                                            }
 
                                                 {
                                                 visibility: hidden;
@@ -178,9 +187,7 @@ $breakingnews = App\Models\NewsPost::where('breaking_news',1)->get();
 
 
 
-                                        @php
-                                        $link = url('/')."/".$item['category']['category_slug']."/"."details"."/".$item->id."/".$item->news_title_slug;
-                                        @endphp
+
                                         <input type="text" size="1" value="{{ $link }}" id="shareUrl{{ $item->id }}" readonly>
                                         <div id="tooltip{{ $item->id }}">Copied!</div>
                                         <a href="Javascript:void(0)"> <img src="https://www.shareicon.net/download/2015/09/12/100116_copy.ico" height="30px" width="30px" id="copyIcon{{ $item->id }}"></a>
